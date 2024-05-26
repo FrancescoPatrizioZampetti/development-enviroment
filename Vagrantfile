@@ -10,24 +10,15 @@ Vagrant.configure("2") do |config|
 	jumpserver.vm.network "public_network", ip: "192.168.1.124"
     jumpserver.vm.box = "rockylinux/9"
 	jumpserver.vm.hostname = "jumpserver"
-  end
-  config.vm.define "proxyserver" do |proxyserver|
-  	proxyserver.vm.provider "virtualbox" do |v|
-		v.memory = 1024
-		v.cpus = 2
-	end	
-    proxyserver.vm.box = "rockylinux/9"
-	proxyserver.vm.network "private_network", ip: "10.0.0.2"
-    proxyserver.vm.hostname = "proxyserver"
   end	
-  config.vm.define "webserver" do |webserver|
-    webserver.vm.provider "virtualbox" do |v|
+  config.vm.define "proxy" do |proxy|
+    proxy.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-    webserver.vm.box = "rockylinux/9"
-    webserver.vm.network "private_network", ip: "10.0.0.3"
-    webserver.vm.hostname = "webserver"
+    proxy.vm.box = "rockylinux/9"
+    proxy.vm.network "private_network", ip: "10.0.0.3"
+    proxy.vm.hostname = "proxy"
   end
   config.vm.define "dbserver" do |dbserver|
     dbserver.vm.provider "virtualbox" do |v|

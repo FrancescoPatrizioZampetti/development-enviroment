@@ -1,60 +1,60 @@
 Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "echo Start provisioning..."
   
-  config.vm.define "jumphost" do |jumphost|
-	jumphost.vm.provider "virtualbox" do |v|
+  config.vm.define "jumpserver" do |jumpserver|
+	jumpserver.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-	jumphost.vm.network "forwarded_port", guest: 22, host: 2222, id: 'ssh', auto_correct: true
-	jumphost.vm.network "public_network", ip: "192.168.1.124"
-    jumphost.vm.box = "rockylinux/9"
-	jumphost.vm.hostname = "jumphost"
+	jumpserver.vm.network "forwarded_port", guest: 22, host: 2222, id: 'ssh', auto_correct: true
+	jumpserver.vm.network "public_network", ip: "192.168.1.124"
+    jumpserver.vm.box = "rockylinux/9"
+	jumpserver.vm.hostname = "jumpserver"
   end
-  config.vm.define "proxy" do |proxy|
-  	proxy.vm.provider "virtualbox" do |v|
+  config.vm.define "proxyserver" do |proxyserver|
+  	proxyserver.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-    proxy.vm.box = "rockylinux/9"
-	proxy.vm.network "private_network", ip: "10.0.0.2"
-    proxy.vm.hostname = "proxy"
+    proxyserver.vm.box = "rockylinux/9"
+	proxyserver.vm.network "private_network", ip: "10.0.0.2"
+    proxyserver.vm.hostname = "proxyserver"
   end	
-  config.vm.define "web" do |web|
-    web.vm.provider "virtualbox" do |v|
+  config.vm.define "webserver" do |webserver|
+    webserver.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-    web.vm.box = "rockylinux/9"
-    web.vm.network "private_network", ip: "10.0.0.3"
-    web.vm.hostname = "web"
+    webserver.vm.box = "rockylinux/9"
+    webserver.vm.network "private_network", ip: "10.0.0.3"
+    webserver.vm.hostname = "webserver"
   end
-  config.vm.define "db" do |db|
-    db.vm.provider "virtualbox" do |v|
+  config.vm.define "dbserver" do |dbserver|
+    dbserver.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-    db.vm.box = "rockylinux/9"
-	db.vm.network "private_network", ip: "10.0.0.4"
-    db.vm.hostname = "db"
+    dbserver.vm.box = "rockylinux/9"
+	dbserver.vm.network "private_network", ip: "10.0.0.4"
+    dbserver.vm.hostname = "dbserver"
   end
-  config.vm.define "iam" do |iam|
-    iam.vm.provider "virtualbox" do |v|
+  config.vm.define "iamserver" do |iamserver|
+    iamserver.vm.provider "virtualbox" do |v|
 		v.memory = 1024
 		v.cpus = 2
 	end	
-    iam.vm.box = "rockylinux/9"
-    iam.vm.network "private_network", ip: "10.0.0.5"
-    iam.vm.hostname = "iam"
+    iamserver.vm.box = "rockylinux/9"
+    iamserver.vm.network "private_network", ip: "10.0.0.5"
+    iamserver.vm.hostname = "iamserver"
   end
-  config.vm.define "cicd" do |cicd|
-    cicd.vm.provider "virtualbox" do |v|
+  config.vm.define "cicdserver" do |cicdserver|
+    cicdserver.vm.provider "virtualbox" do |v|
 		v.memory = 4096
 		v.cpus = 4
 	end
-    cicd.vm.box = "rockylinux/9"
-	cicd.vm.network "private_network", ip: "10.0.0.6"
-    cicd.vm.hostname = "cicd"
+    cicdserver.vm.box = "rockylinux/9"
+	cicdserver.vm.network "private_network", ip: "10.0.0.6"
+    cicdserver.vm.hostname = "cicdserver"
   end
   config.vm.define "appserver1" do |appserver1|
     appserver1.vm.provider "virtualbox" do |v|

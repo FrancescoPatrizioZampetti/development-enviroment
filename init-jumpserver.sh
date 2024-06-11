@@ -1,3 +1,6 @@
+#!/bin/sh
+sudo dnf update -y
+sudo dnf install net-tools -y
 # creo utente
 useradd jump-host
 echo 'jump-host:jumpserver123' | chpasswd jump-host

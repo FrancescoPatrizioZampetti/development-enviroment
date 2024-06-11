@@ -1,3 +1,4 @@
+#!/bin/sh
 useradd devops
 echo 'devops:appserver123' | chpasswd devops
 systemctl stop NetworkManager
